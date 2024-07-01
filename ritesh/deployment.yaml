@@ -16,7 +16,15 @@ spec:
         app: ritesh
     spec:
       containers:
-      - image: ghcr.io/mealie-recipes/mealie:v1.9.0
-        name: mealie
-        ports:
-          - containerPort: 9000
+        - image: ghcr.io/mealie-recipes/mealie:v1.9.0
+          name: mealie
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - mountPath: /app/data
+              name: ritesh-data
+      volumes:
+        - name: ritesh-data
+          persistentVolumeClaim:
+            claimName: ritesh-data 
+
